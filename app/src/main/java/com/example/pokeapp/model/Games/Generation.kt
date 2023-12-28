@@ -1,4 +1,4 @@
-package com.example.pokeapp.ui.model.Games.Generation
+package com.example.pokeapp.model.Games
 
 data class Generation(
     val id: Int,

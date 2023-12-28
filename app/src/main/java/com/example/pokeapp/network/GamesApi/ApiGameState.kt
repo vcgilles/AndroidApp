@@ -1,5 +1,7 @@
 package com.example.pokeapp.network.GamesApi
 
+import com.example.pokeapp.model.Games.Generation
+
 sealed interface ApiGameState {
 
     object Error: ApiGameState

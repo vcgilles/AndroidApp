@@ -11,17 +11,17 @@ import com.example.pokeapp.viewmodel.HomeViewModel
 
 
 @Composable
-fun  HomeOverview(viewModel: HomeViewModel = viewModel(factory = HomeViewModel.Factory))
+fun  HomeOverview(viewModel: HomeViewModel = viewModel(factory = HomeViewModel.Factory), )
 {
 
-    val homeApiState = viewModel.ApiGameState
+    val homeApiState = viewModel.apiGameState
 
     when(homeApiState){
         is ApiGameState.Error -> {
-            Text(text = stringResource(R.string.error))
+            Text("Error")
         }
         is ApiGameState.Loading -> {
-            Text(text = stringResource(R.string.loading))
+            Text("Loading")
         }
         is ApiGameState.Success ->{
 
