@@ -7,13 +7,12 @@ import com.example.pokeapp.model.Games.Generation
 
 @Serializable
 data class ApiGameResponse(
-    val generations : List<APIGeneration>
+    val results : List<APIGeneration>
 )
 
 
 @Serializable
 data class APIGeneration(
-    val id: Int,
     val name: String,
 )
 
@@ -24,9 +23,8 @@ fun Flow<ApiGameResponse>.asDomainObjects(): Flow<List<Generation>> {
 }
 
 fun ApiGameResponse.asDomainObjects(): List<Generation> {
-    return generations.map {
+    return results.map {
         Generation(
-            id = it.id,
             name = it.name,
         )
     }

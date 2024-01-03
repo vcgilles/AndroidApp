@@ -1,20 +1,22 @@
-package com.example.templateapplication.ui.components
+package com.example.pokeapp.ui.Home
+
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-
-import androidx.compose.ui.res.stringResource
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.pokeapp.network.GamesApi.ApiGameState
 import com.example.pokeapp.viewmodel.HomeViewModel
 
-
-
 @Composable
-fun  HomeOverview(viewModel: HomeViewModel = viewModel(factory = HomeViewModel.Factory), )
+fun  HomeOverview(viewModel: HomeViewModel = viewModel(factory = HomeViewModel.Factory) )
 {
-
+    val uiGameList by viewModel.uiGenerationListState.collectAsState()
     val homeApiState = viewModel.apiGameState
+
+    val uiTypeList by viewModel.uiTypeListState.collectAsState()
+    val typeApiState = viewModel.apiTypeState
 
     when(homeApiState){
         is ApiGameState.Error -> {
@@ -24,7 +26,7 @@ fun  HomeOverview(viewModel: HomeViewModel = viewModel(factory = HomeViewModel.F
             Text("Loading")
         }
         is ApiGameState.Success ->{
-
+            screen(generations = uiGameList.genetationList , types = uiTypeList.typeList )
         }
     }
 }

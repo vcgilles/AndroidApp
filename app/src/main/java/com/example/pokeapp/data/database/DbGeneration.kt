@@ -6,21 +6,17 @@ import com.example.pokeapp.model.Games.Generation
 
 @Entity
 class DbGeneration (
-    @PrimaryKey(autoGenerate = true)
-    val id: Int,
+    @PrimaryKey
     val name: String,
     )
 
 fun Generation.asDbGeneration() : DbGeneration = DbGeneration  (
-    id = id,
-    name = name,
+    name = name
 )
 
 
 fun DbGeneration.asDomainGeneration() : Generation = Generation(
-    id = id,
-    name = name,
-
+    name = name
 )
 
 fun List<DbGeneration>.asDomainGenerations() = map { it.asDomainGeneration() }

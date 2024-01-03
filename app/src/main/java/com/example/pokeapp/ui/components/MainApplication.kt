@@ -1,5 +1,6 @@
 package com.example.pokeapp.ui.components
 
+import android.util.Log
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
 import androidx.compose.material.icons.Icons
@@ -16,9 +17,12 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.compose.ui.Modifier
+import com.example.pokeapp.ui.Home.HomeOverview
+import com.example.pokeapp.ui.PokemonScreen.PokemonDetailScreen
+import com.example.pokeapp.ui.PokemonScreen.PokemonScreenOverview
+import com.example.pokeapp.ui.components.TopBar
+import com.example.pokeapp.ui.components.BottomBar
 
-import com.example.templateapplication.ui.components.TopBar
-import com.example.templateapplication.ui.components.BottomBar
 
 @Composable
 fun MainApplication(navController: NavHostController = rememberNavController()) {
@@ -30,6 +34,12 @@ fun MainApplication(navController: NavHostController = rememberNavController()) 
             Destinations.Start.name,
             inclusive = false,
         )
+    }
+    val goPokemonListScreen: () -> Unit = {
+        navController.navigate(Destinations.PokemonList.name)
+    }
+    val goPokemonDetailScreen: (String) -> Unit = { name ->
+        navController.navigate("${Destinations.PokemonDetail.name}/$name")
     }
 
     Scaffold(
@@ -47,6 +57,8 @@ fun MainApplication(navController: NavHostController = rememberNavController()) 
             BottomBar(
                 currentBackStackEntry?.destination?.route,
                 onHome = goStartScreen,
+                onPokemonList = goPokemonListScreen,
+
             )
         },
     ) { innerPadding ->
@@ -56,8 +68,18 @@ fun MainApplication(navController: NavHostController = rememberNavController()) 
             Modifier.padding(innerPadding)
         ) {
                 composable(Destinations.Start.name) {
-
+                    HomeOverview()
                 }
+                composable(Destinations.PokemonList.name) {
+                    PokemonScreenOverview(goPokemonDetailScreen = goPokemonDetailScreen)
+                }
+                composable(route = "${Destinations.PokemonDetail.name}/{name}") {
+                    val name = it.arguments?.getString("name")
+                    Log.i("MainAPplicatione", name.toString())
+                    name?.let { it1 -> PokemonDetailScreen(pokemonName = it1) }
+                }
+
+
           }
         }
     }

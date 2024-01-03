@@ -12,6 +12,8 @@ import com.example.pokeapp.AppApplication
 import com.example.pokeapp.data.AppRepository
 import com.example.pokeapp.network.GamesApi.ApiGameState
 import com.example.pokeapp.network.GamesApi.GenerationListState
+import com.example.pokeapp.network.TypeApi.ApiTypeState
+import com.example.pokeapp.network.TypeApi.TypeListState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -28,14 +30,20 @@ class HomeViewModel(private val appRepository: AppRepository): ViewModel() {
 
     lateinit var uiGenerationListState: StateFlow<GenerationListState>
 
+    lateinit var uiTypeListState: StateFlow<TypeListState>
+
     var apiGameState: ApiGameState by mutableStateOf(ApiGameState.Loading)
+        private set
+
+    var apiTypeState : ApiTypeState by mutableStateOf(ApiTypeState.Loading)
         private set
 
     init{
         getGenerations()
+        getTypes()
     }
 
-    private fun getGenerations() {
+    fun getGenerations() {
         try {
             viewModelScope.launch { appRepository.refreshGeneration() }
             uiGenerationListState = appRepository.getGenerations().map { GenerationListState(it) }
@@ -51,6 +59,23 @@ class HomeViewModel(private val appRepository: AppRepository): ViewModel() {
             apiGameState = ApiGameState.Error
         }
     }
+    fun getTypes() {
+        try {
+            viewModelScope.launch { appRepository.refreshType() }
+            uiTypeListState = appRepository.getTypes().map { TypeListState(it)}
+                .stateIn(
+                    scope = viewModelScope,
+                    started = SharingStarted.WhileSubscribed(500_000L),
+                    initialValue = TypeListState(listOf())
+                )
+            apiTypeState = ApiTypeState.Success
+        } catch (e: SocketTimeoutException) {
+            apiTypeState = ApiTypeState.Error
+        } catch (e: IOException) {
+            apiTypeState = ApiTypeState.Error
+        }
+    }
+
 
     companion object {
         val Factory: ViewModelProvider.Factory = viewModelFactory {

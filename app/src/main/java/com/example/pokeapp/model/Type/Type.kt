@@ -1,8 +1,8 @@
-package com.example.pokeapp.model.Games
+package com.example.pokeapp.model.Type
 
 import kotlin.random.Random
 
-data class Generation(
-    val name: String,
+data class Type (
+    val type: String,
     val image: String = "https://picsum.photos/200/300?random=${Random.nextInt(0, 100)}",
-    )
+)

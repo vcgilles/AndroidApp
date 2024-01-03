@@ -7,13 +7,17 @@ import androidx.room.RoomDatabase
 
 
 @Database(
-    entities = [DbGeneration::class],
-    version = 2,
+    entities = [DbGeneration::class , DbType::class, DbPokemon::class],
+    version = 4,
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase(){
 
     abstract fun generationDao(): GenerationDao
+
+    abstract fun typeDao(): TypeDao
+
+    abstract fun pokemonDao(): PokemonDao
 
     companion object{
         @Volatile

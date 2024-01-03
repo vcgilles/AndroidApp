@@ -78,7 +78,7 @@ dependencies {
     implementation("androidx.navigation:navigation-compose:2.7.2")
     implementation("com.google.android.material:material:1.10.0")
     testImplementation("junit:junit:4.13.2")
-    testImplementation("mockito-core:3.12.4")
+    androidTestImplementation("mockito-core:3.12.4")
     testImplementation("org.mockito:mockito-inline:3.12.4")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.2")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1")
@@ -93,6 +93,7 @@ dependencies {
     androidTestImplementation("androidx.navigation:navigation-testing:2.6.0")
     androidTestImplementation("androidx.test.espresso:espresso-intents:3.5.1")
     implementation("com.squareup.okhttp3:logging-interceptor:4.9.0")
+    testImplementation("org.mockito:mockito-core:3.12.4")
 
 
     //room
