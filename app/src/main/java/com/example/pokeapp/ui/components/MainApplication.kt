@@ -2,9 +2,9 @@ package com.example.pokeapp.ui.components
 
 import android.util.Log
 import androidx.compose.foundation.layout.Row
+import androidx.compose.material.icons.Icons
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
-import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton

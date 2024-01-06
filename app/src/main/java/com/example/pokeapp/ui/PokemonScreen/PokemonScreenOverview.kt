@@ -26,8 +26,6 @@ fun  PokemonScreenOverview (viewModel: PokemonViewModel = viewModel(factory = Po
     val uiPokemonList by viewModel.uiPokemonListState.collectAsState()
     val pokemonApiState = viewModel.apiPokemonState
 
-    val pokemonByName by viewModel.pokemonByName.collectAsState()
-    var name by remember { mutableStateOf("") }
 
     when(pokemonApiState){
         is ApiPokemonState.Error -> {
