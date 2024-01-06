@@ -33,6 +33,18 @@ import org.junit.Test
         Assert.assertEquals(expectedApiState, viewModel.apiTypeState)
     }
 
+     /*@Test
+     fun getTypes_methodCall_StateIsErrorAfterCall() {
+         // Arrange
+         val expectedApiState = ApiTypeState.Error
+
+         // Act
+         viewModel.getTypes()
+
+         // Assert
+         Assert.assertEquals(expectedApiState, viewModel.apiTypeState)
+     }*/
+
      @Test
      fun getGenerations_methodCall_StateIsSuccessAfterCall() {
          // Arrange
@@ -44,5 +56,17 @@ import org.junit.Test
          // Assert
          Assert.assertEquals(expectedApiState, viewModel.apiGameState)
      }
+
+     /*@Test
+     fun getGenerations_methodCall_StateIsErrorAfterCall() {
+         // Arrange
+         val expectedApiState = ApiGameState.Error
+
+         // Act
+         viewModel.getGenerations()
+
+         // Assert
+         Assert.assertEquals(expectedApiState, viewModel.apiGameState)
+     }*/
 
 }

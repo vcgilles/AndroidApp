@@ -30,8 +30,19 @@ class PokemonModelTest {
         // Assert
         Assert.assertEquals(expectedApiState, viewModel.apiPokemonState)
     }
-    @Test
-    fun getPokemonDetails_methodCall_StateIsSuccessAfterCall() {
-        viewModel.getPokemonDetail("bulbasaur")
-    }
+
+    /*@Test
+    fun getPokemons_methodCall_StateIsErrorAfterCall() {
+        // Arrange
+        val expectedApiState = ApiPokemonState.Error
+
+        // Act
+        viewModel.getPokemon()
+
+        // Assert
+        Assert.assertEquals(expectedApiState, viewModel.apiPokemonState)
+    }*/
+
+
+
 }

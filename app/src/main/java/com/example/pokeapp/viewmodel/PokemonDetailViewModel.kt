@@ -20,18 +20,12 @@ class PokemonDetailViewModel(private val appRepository: AppRepository): ViewMode
         private set
 
     fun getPokemonDetail(name: String) {
-        Log.i("result detail news", "result: ${name}")
         viewModelScope.launch {
             try {
                 val result = appRepository.getPokemonDetail(name)
                 pokemonDetailApiState = ApiPokemonDetailState.Success(result)
-
-                Log.i("result detail news", "result: ${result}")
-
-
             } catch (e: Exception) {
                 pokemonDetailApiState = ApiPokemonDetailState.Error
-                Log.i("result detail doctor", "result: ${e.message}")
             }
         }
     }

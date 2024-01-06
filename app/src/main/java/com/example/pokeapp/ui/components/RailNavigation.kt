@@ -51,7 +51,7 @@ fun RailNavigation(
             icon = {
                 Icon(
                     imageVector = Icons.Outlined.Home,
-                    contentDescription = "Home"
+                    contentDescription = "HomeRail"
                 )
             }
         )
@@ -61,7 +61,7 @@ fun RailNavigation(
             icon = {
                 Icon(
                     imageVector = Icons.Filled.List,
-                    contentDescription = "PokemonList"
+                    contentDescription = "PokemonListRail"
                 )
             }
         )
