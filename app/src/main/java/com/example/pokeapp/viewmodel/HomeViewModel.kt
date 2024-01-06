@@ -23,7 +23,15 @@ import kotlinx.coroutines.launch
 import java.io.IOException
 import java.net.SocketTimeoutException
 
-
+/**
+ * ViewModel responsible for providing data related to the home screen.
+ *
+ * @property appRepository The repository for accessing data related to the PokeApp application.
+ * @property uiGenerationListState The [StateFlow] representing the UI state for the list of generations.
+ * @property uiTypeListState The [StateFlow] representing the UI state for the list of Pokemon types.
+ * @property apiGameState The current state of the API call for generations (Loading, Success, or Error).
+ * @property apiTypeState The current state of the API call for Pokemon types (Loading, Success, or Error).
+ */
 class HomeViewModel(private val appRepository: AppRepository): ViewModel() {
 
 
@@ -38,11 +46,17 @@ class HomeViewModel(private val appRepository: AppRepository): ViewModel() {
     var apiTypeState : ApiTypeState by mutableStateOf(ApiTypeState.Loading)
         private set
 
+    /**
+     * Initializes the ViewModel by fetching data for generations and types.
+     */
     init{
         getGenerations()
         getTypes()
     }
 
+    /**
+     * Fetches data for generations and updates the UI state accordingly.
+     */
     fun getGenerations() {
         try {
             viewModelScope.launch { appRepository.refreshGeneration() }
@@ -59,6 +73,9 @@ class HomeViewModel(private val appRepository: AppRepository): ViewModel() {
             apiGameState = ApiGameState.Error
         }
     }
+    /**
+     * Fetches data for Pokemon types and updates the UI state accordingly.
+     */
     fun getTypes() {
         try {
             viewModelScope.launch { appRepository.refreshType() }
@@ -76,7 +93,9 @@ class HomeViewModel(private val appRepository: AppRepository): ViewModel() {
         }
     }
 
-
+    /**
+     * A companion object containing a [Factory] property for creating instances of [HomeViewModel].
+     */
     companion object {
         val Factory: ViewModelProvider.Factory = viewModelFactory {
             initializer {

@@ -12,6 +12,14 @@ import com.example.pokeapp.viewmodel.PokemonViewModel
 import com.example.pokeapp.network.PokemonApi.ApiPokemonState
 import com.example.pokeapp.ui.components.NavigationType
 
+
+/**
+ * Composable function representing the overview screen displaying a list of Pokemon cards.
+ *
+ * @param viewModel The [PokemonViewModel] used to retrieve Pokemon data.
+ * @param goPokemonDetailScreen The callback to navigate to the Pokemon detail screen.
+ * @param navigationType The type of navigation (e.g., [NavigationType.BOTTOM_NAVIGATION] or [NavigationType.NAVIGATION_RAIL]).
+ */
 @Composable
 fun  PokemonScreenOverview (viewModel: PokemonViewModel = viewModel(factory = PokemonViewModel.Factory), goPokemonDetailScreen: (String) -> Unit , navigationType: NavigationType) {
 

@@ -28,31 +28,80 @@ import com.example.pokeapp.network.getPokemonAsFlow
 import com.example.pokeapp.network.getTypeAsFlow
 import kotlinx.coroutines.launch
 
-
+/**
+ * Interface defining the contract for the application repository in the PokeApp.
+ * It provides methods for accessing and managing data related to Pokemon generations, types, and individual Pokemon entities.
+ */
 interface AppRepository {
+    /**
+     * Retrieves a [Flow] emitting a list of Pokemon generations.
+     */
     fun getGenerations(): Flow<List<Generation>>
 
+    /**
+     * Inserts a Pokemon generation into the repository.
+     */
     suspend fun insertGeneration(generation: Generation)
 
+    /**
+     * Refreshes the Pokemon generations data in the repository.
+     */
     suspend fun refreshGeneration()
 
+    /**
+     * Retrieves a [Flow] emitting a list of Pokemon types.
+     */
     fun getTypes(): Flow<List<Type>>
 
+    /**
+     * Inserts a Pokemon type into the repository.
+     */
     suspend fun insertType(type: Type)
 
+    /**
+     * Refreshes the Pokemon types data in the repository.
+     */
     suspend fun refreshType()
 
+    /**
+     * Retrieves a [Flow] emitting a list of Pokemon entities.
+     */
     fun getPokemon(): Flow<List<Pokemon>>
 
+    /**
+     * Inserts a Pokemon entity into the repository.
+     */
     suspend fun insertPokemon(pokemon: Pokemon)
 
+    /**
+     * Refreshes the Pokemon entities data in the repository.
+     */
     suspend fun refreshPokemon()
 
+    /**
+     * Retrieves detailed information about a specific Pokemon by name.
+     *
+     * @param name The name of the Pokemon.
+     * @return A [PokemonDetail] object representing detailed information about the Pokemon.
+     */
     suspend fun getPokemonDetail(name: String): PokemonDetail?
 
+    /**
+     * Retrieves a [Flow] emitting a list of Pokemon entities matching the given name.
+     *
+     * @param name The name of the Pokemon to search for.
+     */
     fun getPokemonByName(name: String): Flow<List<Pokemon>>
 
 }
+/**
+ * Implementation of [AppRepository] that uses local caching for data retrieval and updates.
+ *
+ * @param apiService The API service for making network requests.
+ * @param generationDao Data Access Object (DAO) for Pokemon generations.
+ * @param typeDao Data Access Object (DAO) for Pokemon types.
+ * @param pokemonDao Data Access Object (DAO) for individual Pokemon entities.
+ */
  class CachingAppRepository(
     private val apiService: ApiService,
     private val generationDao: GenerationDao,

@@ -26,6 +26,12 @@ import com.example.pokeapp.ui.components.TopBar
 import com.example.pokeapp.ui.components.BottomBar
 
 
+/**
+ * Composable function representing the main entry point of the PokeApp application.
+ *
+ * @param navController The [NavHostController] used for navigation within the application.
+ * @param navigationType The type of navigation (e.g., [NavigationType.BOTTOM_NAVIGATION] or [NavigationType.NAVIGATION_RAIL]).
+ */
 @Composable
 fun MainApplication(navController: NavHostController = rememberNavController(), navigationType: NavigationType) {
     val currentBackStackEntry by navController.currentBackStackEntryAsState()
@@ -116,7 +122,9 @@ fun MainApplication(navController: NavHostController = rememberNavController(), 
     }
 }
 
-
+/**
+ * Composable function providing a preview of the [MainApplication] within the [PokeAppTheme].
+ */
 @Preview
 @Composable
 fun ScaffoldExamplePreview() {

@@ -60,6 +60,9 @@ dependencies {
     implementation("com.squareup.okhttp3:okhttp:4.11.0")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
 
+    // Dokka
+    dokkaPlugin("org.jetbrains.dokka:android-documentation-plugin:1.9.10")
+
     //Image Coil
     implementation("io.coil-kt:coil-compose:2.5.0")
 

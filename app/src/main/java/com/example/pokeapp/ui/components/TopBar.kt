@@ -15,7 +15,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.stringResource
 
 
-
+/**
+ * Composable function representing the top app bar in the PokeApp application.
+ *
+ * @param navigationIcon The content of the navigation icon in the top app bar.
+ */
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 fun TopBar(

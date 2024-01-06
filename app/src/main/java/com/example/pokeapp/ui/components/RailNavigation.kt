@@ -38,6 +38,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 
 
+/**
+ * Composable function representing navigation using a navigation rail in the PokeApp application.
+ *
+ * @param currentBackStackEntry The current back stack entry representing the active destination.
+ * @param onHome Callback function invoked when the "Home" icon in the navigation rail is clicked.
+ * @param onPokemonList Callback function invoked when the "Pokemon List" icon in the navigation rail is clicked.
+ */
 @Composable
 fun RailNavigation(
     currentBackStackEntry: String?,

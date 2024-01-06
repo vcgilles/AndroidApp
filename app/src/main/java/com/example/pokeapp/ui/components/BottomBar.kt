@@ -15,6 +15,13 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 
 
+/**
+ * Composable function representing a custom Bottom Bar for navigation within the PokeApp application.
+ *
+ * @param currentBackStackEntry The current back stack entry representing the active destination.
+ * @param onHome Callback function invoked when the "Home" icon is clicked.
+ * @param onPokemonList Callback function invoked when the "Pokemon List" icon is clicked.
+ */
 @Composable
 fun BottomBar(
     currentBackStackEntry: String?,

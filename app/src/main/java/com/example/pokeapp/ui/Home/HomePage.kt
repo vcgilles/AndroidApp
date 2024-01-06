@@ -37,7 +37,12 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 
-
+/**
+ * Composable function representing a card for displaying information about a generation.
+ *
+ * @param generation The [Generation] object containing information about the generation.
+ * @param modifier Modifier for customizing the appearance of the card.
+ */
 @Composable
 fun GenCard(generation : Generation, modifier: Modifier = Modifier) {
     Card(
@@ -66,6 +71,12 @@ fun GenCard(generation : Generation, modifier: Modifier = Modifier) {
     Divider(color = MaterialTheme.colorScheme.onSurface, thickness = 1.dp)
 
 }
+/**
+ * Composable function representing a card for displaying information about a Pokemon type.
+ *
+ * @param type The [Type] object containing information about the Pokemon type.
+ * @param modifier Modifier for customizing the appearance of the card.
+ */
 @Composable
 fun TypeCard(type : Type, modifier: Modifier = Modifier) {
     Card(modifier = Modifier
@@ -94,7 +105,13 @@ fun TypeCard(type : Type, modifier: Modifier = Modifier) {
 
 }
 
-
+/**
+ * Composable function representing the main screen displaying generations and Pokemon types.
+ *
+ * @param generations List of [Generation] objects to be displayed.
+ * @param types List of [Type] objects to be displayed.
+ * @param navigationType The type of navigation (e.g., [NavigationType.BOTTOM_NAVIGATION] or [NavigationType.NAVIGATION_RAIL]).
+ */
 @Composable
 fun screen(generations: List<Generation> , types: List<Type> , navigationType: NavigationType) {
 

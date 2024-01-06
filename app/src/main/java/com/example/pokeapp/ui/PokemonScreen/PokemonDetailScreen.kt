@@ -41,7 +41,11 @@ import com.example.pokeapp.ui.components.NavigationType
 import com.example.pokeapp.viewmodel.PokemonDetailViewModel
 import com.example.pokeapp.viewmodel.PokemonViewModel
 
-
+/**
+ * Composable function representing the bottom part of the Pokemon detail screen.
+ *
+ * @param pokemon The [PokemonDetail] object containing information about the Pokemon.
+ */
 @Composable
 fun PokemonDetailScreenBottom(pokemon : PokemonDetail) {
     Box(modifier = Modifier.fillMaxSize()){
@@ -116,6 +120,11 @@ fun PokemonDetailScreenBottom(pokemon : PokemonDetail) {
 
     }
 }
+/**
+ * Composable function representing the rail part of the Pokemon detail screen.
+ *
+ * @param pokemon The [PokemonDetail] object containing information about the Pokemon.
+ */
 @Composable
 fun PokemonDetailScreenRail(pokemon : PokemonDetail) {
     Box(modifier = Modifier.fillMaxSize()){
@@ -183,6 +192,13 @@ fun PokemonDetailScreenRail(pokemon : PokemonDetail) {
     }
 }
 
+/**
+ * Composable function representing the Pokemon detail screen.
+ *
+ * @param pokemonName The name of the Pokemon to retrieve details for.
+ * @param viewmodel The [PokemonDetailViewModel] used to manage data for the Pokemon detail screen.
+ * @param navigationType The type of navigation (e.g., [NavigationType.BOTTOM_NAVIGATION] or [NavigationType.NAVIGATION_RAIL]).
+ */
 @Composable
 fun PokemonDetailScreen(pokemonName : String, viewmodel : PokemonDetailViewModel = viewModel(factory = PokemonDetailViewModel.Factory), navigationType: NavigationType) {
 

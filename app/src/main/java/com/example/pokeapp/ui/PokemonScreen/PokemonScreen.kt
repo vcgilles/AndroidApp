@@ -37,7 +37,12 @@ import coil.compose.AsyncImage
 import com.example.pokeapp.model.Pokemon.Pokemon
 import com.example.pokeapp.ui.components.NavigationType
 
-
+/**
+ * Composable function representing the bottom part of a Pokemon card.
+ *
+ * @param pokemon The [Pokemon] object containing information about the Pokemon.
+ * @param onPokemonClick The callback to be invoked when the Pokemon card is clicked.
+ */
 @Composable
 fun PokemonCardBottom(pokemon: Pokemon, onPokemonClick: (String) -> Unit) {
     Card(
@@ -105,6 +110,12 @@ fun PokemonCardBottom(pokemon: Pokemon, onPokemonClick: (String) -> Unit) {
     )
 }
 
+/**
+ * Composable function representing the rail part of a Pokemon card.
+ *
+ * @param pokemon The [Pokemon] object containing information about the Pokemon.
+ * @param onPokemonClick The callback to be invoked when the Pokemon card is clicked.
+ */
 @Composable
 fun PokemonCardRail(pokemon: Pokemon, onPokemonClick: (String) -> Unit) {
     Card(
@@ -163,7 +174,13 @@ fun PokemonCardRail(pokemon: Pokemon, onPokemonClick: (String) -> Unit) {
 }
 
 
-
+/**
+ * Composable function representing the screen displaying a list of Pokemon cards.
+ *
+ * @param pokemons The list of [Pokemon] objects to be displayed.
+ * @param onPokemonClick The callback to be invoked when a Pokemon card is clicked.
+ * @param navigationType The type of navigation (e.g., [NavigationType.BOTTOM_NAVIGATION] or [NavigationType.NAVIGATION_RAIL]).
+ */
 @Composable
 fun PokemonScreen(pokemons: List<Pokemon>, onPokemonClick: (String) -> Unit , navigationType: NavigationType) {
     if (navigationType == NavigationType.BOTTOM_NAVIGATION) {
