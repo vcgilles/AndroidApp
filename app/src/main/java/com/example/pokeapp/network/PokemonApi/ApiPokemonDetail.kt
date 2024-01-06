@@ -5,21 +5,19 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class ApiPokemonDetail (
-    val detail : Jonny
-)
-
-@Serializable
-data class Jonny(
     val id: Int,
-    val name: String,
-    val height: Int,
-    val weight: Int,
+    val name : String? = null,
+    val height: Int? = 100,
+    val weight: Int? = 100,
 )
 
 fun ApiPokemonDetail.asDomainObject(): PokemonDetail {
-    return this.detail.let {
+    return let {
         PokemonDetail(
-            name = it.name
+            id = it?.id ?: 0,
+            name = it?.name,
+            height = it?.height,
+            weight = it?.weight,
         )
     }
 }

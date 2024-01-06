@@ -30,17 +30,15 @@ class PokemonViewModel(private val appRepository: AppRepository): ViewModel() {
 
     lateinit var uiPokemonListState: StateFlow<PokemonListState>
 
-    private val _pokemonByName = MutableStateFlow<List<Pokemon>>(emptyList())
+    private val _PokemonByName = MutableStateFlow<List<Pokemon>>(emptyList())
+
+    val pokemonByName: StateFlow<List<Pokemon>> = _PokemonByName.asStateFlow()
 
     var apiPokemonState: ApiPokemonState by mutableStateOf(ApiPokemonState.Loading)
         private set
-    var pokemonDetailApiState: ApiPokemonDetailState by mutableStateOf(ApiPokemonDetailState.Loading)
-        private set
-
     init{
         getPokemon()
     }
-
     fun getPokemon() {
         try {
             viewModelScope.launch { appRepository.refreshPokemon() }
@@ -58,37 +56,16 @@ class PokemonViewModel(private val appRepository: AppRepository): ViewModel() {
         }
     }
 
-    fun getPokemonDetail(name: String) {
-        Log.i("result detail news", "result: ${name}")
-        viewModelScope.launch {
-            try {
-                val result = appRepository.getPokemonDetail(name)
-                pokemonDetailApiState = ApiPokemonDetailState.Success(result)
-
-                Log.i("result detail news", "result: ${result}")
-
-
-            } catch (e: Exception) {
-                pokemonDetailApiState = ApiPokemonDetailState.Error
-                Log.i("result detail doctor", "result: ${e.message}")
-            }
-        }
-    }
-
-
-    val pokemonByName: StateFlow<List<Pokemon>> = _pokemonByName.asStateFlow()
-
     fun fetchPokemonByName(name: String) {
         viewModelScope.launch {
             try {
-                _pokemonByName.value = appRepository.getPokemonByName(name).first()
+                _PokemonByName.value = appRepository.getPokemonByName(name).first()
             } catch (e: Exception) {
                 Log.e("CharacterViewModel", "Error fetching character: ${e.message}")
-                _pokemonByName.value = emptyList()
+                _PokemonByName.value = emptyList()
             }
         }
     }
-
 
     companion object {
         val Factory: ViewModelProvider.Factory = viewModelFactory {
@@ -99,5 +76,4 @@ class PokemonViewModel(private val appRepository: AppRepository): ViewModel() {
             }
         }
     }
-
 }

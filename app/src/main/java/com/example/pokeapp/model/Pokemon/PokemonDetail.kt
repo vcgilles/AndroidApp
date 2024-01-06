@@ -3,10 +3,10 @@ package com.example.pokeapp.model.Pokemon
 import kotlin.random.Random
 
 data class PokemonDetail (
-    val id: Int = Random.nextInt(0, 1000),
-    val name: String,
-    val height: Int = Random.nextInt(0, 1000),
-    val weight: Int = Random.nextInt(0, 1000),
+    val id: Int,
+    val name: String? = null,
+    val height: Int? = null ,
+    val weight: Int? = null ,
     val image: String  = image(id),
 )
 

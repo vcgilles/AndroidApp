@@ -17,4 +17,5 @@ interface PokemonDao {
 
     @Query("SELECT * FROM DbPokemon WHERE name LIKE '%' || :name || '%'")
     fun getPokemonByName(name: String): Flow<List<DbPokemon>>
+
 }

@@ -125,7 +125,7 @@ interface AppRepository {
 
     override suspend fun refreshPokemon() {
         try {
-            apiService.getPokemonAsFlow(151,0).asDomainObjects().collect {
+            apiService.getPokemonAsFlow(20,0).asDomainObjects().collect {
                 for (pokemon in it) {
                     insertPokemon(pokemon)
                 }
@@ -145,9 +145,8 @@ interface AppRepository {
      }
 
      override fun getPokemonByName(name: String): Flow<List<Pokemon>> {
-         return pokemonDao.getPokemonByName(name).map {
-             it.asDomainPokemon()
-         }
+         return pokemonDao.getPokemonByName(name).map{it.asDomainPokemon()}
+
      }
 
 

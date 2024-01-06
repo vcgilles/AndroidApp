@@ -48,4 +48,8 @@ class FakeApiAppRepository : AppRepository{
     override suspend fun getPokemonDetail(name: String): PokemonDetail? {
         return FakeDataSource.pokemonDetails.find { it.name == name }
     }
+
+    override fun getPokemonByName(name: String): Flow<List<Pokemon>> {
+        TODO("Not yet implemented")
+    }
 }

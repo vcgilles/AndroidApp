@@ -8,9 +8,10 @@ import androidx.compose.runtime.getValue
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.pokeapp.network.GamesApi.ApiGameState
 import com.example.pokeapp.viewmodel.HomeViewModel
+import com.example.pokeapp.ui.components.NavigationType
 
 @Composable
-fun  HomeOverview(viewModel: HomeViewModel = viewModel(factory = HomeViewModel.Factory) )
+fun  HomeOverview(viewModel: HomeViewModel = viewModel(factory = HomeViewModel.Factory ), navigationType: NavigationType )
 {
     val uiGameList by viewModel.uiGenerationListState.collectAsState()
     val homeApiState = viewModel.apiGameState
@@ -26,7 +27,7 @@ fun  HomeOverview(viewModel: HomeViewModel = viewModel(factory = HomeViewModel.F
             Text("Loading")
         }
         is ApiGameState.Success ->{
-            screen(generations = uiGameList.genetationList , types = uiTypeList.typeList )
+            screen(generations = uiGameList.genetationList , types = uiTypeList.typeList , navigationType = navigationType)
         }
     }
 }

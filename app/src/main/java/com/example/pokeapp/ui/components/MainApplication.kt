@@ -1,12 +1,14 @@
 package com.example.pokeapp.ui.components
 
 import android.util.Log
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.NavigationRail
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.tooling.preview.Preview
@@ -25,7 +27,7 @@ import com.example.pokeapp.ui.components.BottomBar
 
 
 @Composable
-fun MainApplication(navController: NavHostController = rememberNavController()) {
+fun MainApplication(navController: NavHostController = rememberNavController(), navigationType: NavigationType) {
     val currentBackStackEntry by navController.currentBackStackEntryAsState()
     val isStartDestination = currentBackStackEntry?.destination?.route == Destinations.Start.name
 
@@ -42,55 +44,83 @@ fun MainApplication(navController: NavHostController = rememberNavController()) 
         navController.navigate("${Destinations.PokemonDetail.name}/$name")
     }
 
-    Scaffold(
-        topBar = {
-            TopBar {
-                if (!isStartDestination) {
-                    IconButton(onClick = { navController.popBackStack() }) {
-                        Icon(Icons.Filled.ArrowBack, contentDescription = "Go back")
+    when (navigationType) {
+        NavigationType.BOTTOM_NAVIGATION -> {
+            Scaffold(
+                topBar = {
+                    TopBar {
+                        if (!isStartDestination) {
+                            IconButton(onClick = { navController.popBackStack() }) {
+                                Icon(Icons.Filled.ArrowBack, contentDescription = "Go back")
+                            }
+                        }
+                    }
+                },
+                bottomBar =
+                {
+                    BottomBar(
+                        currentBackStackEntry?.destination?.route,
+                        onHome = goStartScreen,
+                        onPokemonList = goPokemonListScreen,
+
+                        )
+                },
+            ) { innerPadding ->
+                NavHost(
+                    navController = navController,
+                    startDestination = Destinations.Start.name,
+                    Modifier.padding(innerPadding)
+                ) {
+                    composable(Destinations.Start.name) {
+                        HomeOverview(navigationType = NavigationType.BOTTOM_NAVIGATION)
+                    }
+                    composable(Destinations.PokemonList.name) {
+                        PokemonScreenOverview(goPokemonDetailScreen = goPokemonDetailScreen, navigationType = NavigationType.BOTTOM_NAVIGATION)
+                    }
+                    composable(route = "${Destinations.PokemonDetail.name}/{name}") {
+                        val name = it.arguments?.getString("name")
+                        Log.i("MainAPplicatione", name.toString())
+                        name?.let { it1 -> PokemonDetailScreen(pokemonName = it1, navigationType = NavigationType.BOTTOM_NAVIGATION) }
+                    }
+
+
+                }
+            }
+        }
+
+        NavigationType.NAVIGATION_RAIL -> {
+            Row {
+                RailNavigation(
+                    currentBackStackEntry?.destination?.route,
+                    onHome = goStartScreen,
+                    onPokemonList = goPokemonListScreen,
+
+                    )
+                NavHost(
+                    navController = navController,
+                    startDestination = Destinations.Start.name,
+                ) {
+                    composable(Destinations.Start.name) {
+                        HomeOverview(navigationType = NavigationType.NAVIGATION_RAIL)
+                    }
+                    composable(Destinations.PokemonList.name) {
+                        PokemonScreenOverview(goPokemonDetailScreen = goPokemonDetailScreen , navigationType = NavigationType.NAVIGATION_RAIL)
+                    }
+                    composable(route = "${Destinations.PokemonDetail.name}/{name}") {
+                        val name = it.arguments?.getString("name")
+                        name?.let { it1 -> PokemonDetailScreen(pokemonName = it1 , navigationType = NavigationType.NAVIGATION_RAIL) }
                     }
                 }
             }
-        },
-        bottomBar =
-        {
-            BottomBar(
-                currentBackStackEntry?.destination?.route,
-                onHome = goStartScreen,
-                onPokemonList = goPokemonListScreen,
-
-            )
-        },
-    ) { innerPadding ->
-        NavHost(
-            navController = navController,
-            startDestination = Destinations.Start.name,
-            Modifier.padding(innerPadding)
-        ) {
-                composable(Destinations.Start.name) {
-                    HomeOverview()
-                }
-                composable(Destinations.PokemonList.name) {
-                    PokemonScreenOverview(goPokemonDetailScreen = goPokemonDetailScreen)
-                }
-                composable(route = "${Destinations.PokemonDetail.name}/{name}") {
-                    val name = it.arguments?.getString("name")
-                    Log.i("MainAPplicatione", name.toString())
-                    name?.let { it1 -> PokemonDetailScreen(pokemonName = it1) }
-                }
-
-
-          }
         }
     }
-
-
+}
 
 
 @Preview
 @Composable
 fun ScaffoldExamplePreview() {
     PokeAppTheme {
-        MainApplication(navController = rememberNavController())
+        MainApplication(navController = rememberNavController(), navigationType = NavigationType.BOTTOM_NAVIGATION)
     }
 }
