@@ -8,7 +8,6 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.NavigationRail
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.tooling.preview.Preview
@@ -22,8 +21,6 @@ import androidx.compose.ui.Modifier
 import com.example.pokeapp.ui.Home.HomeOverview
 import com.example.pokeapp.ui.PokemonScreen.PokemonDetailScreen
 import com.example.pokeapp.ui.PokemonScreen.PokemonScreenOverview
-import com.example.pokeapp.ui.components.TopBar
-import com.example.pokeapp.ui.components.BottomBar
 
 
 /**

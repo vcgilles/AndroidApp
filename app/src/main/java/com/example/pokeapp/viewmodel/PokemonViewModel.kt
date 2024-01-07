@@ -12,7 +12,6 @@ import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.pokeapp.AppApplication
 import com.example.pokeapp.data.AppRepository
 import com.example.pokeapp.model.Pokemon.Pokemon
-import com.example.pokeapp.network.PokemonApi.ApiPokemonDetailState
 import com.example.pokeapp.network.PokemonApi.ApiPokemonState
 import com.example.pokeapp.network.PokemonApi.PokemonListState
 import kotlinx.coroutines.flow.MutableStateFlow

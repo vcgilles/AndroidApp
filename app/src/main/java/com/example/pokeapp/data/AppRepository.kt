@@ -1,7 +1,6 @@
 package com.example.pokeapp.data
 
-import android.util.Log
-import androidx.lifecycle.viewModelScope
+
 import com.example.pokeapp.data.database.GenerationDao
 import com.example.pokeapp.data.database.PokemonDao
 import com.example.pokeapp.data.database.TypeDao
@@ -26,7 +25,6 @@ import com.example.pokeapp.network.PokemonApi.asDomainObjects
 import com.example.pokeapp.network.TypeApi.asDomainObjects
 import com.example.pokeapp.network.getPokemonAsFlow
 import com.example.pokeapp.network.getTypeAsFlow
-import kotlinx.coroutines.launch
 
 /**
  * Interface defining the contract for the application repository in the PokeApp.

@@ -1,6 +1,5 @@
 package com.example.pokeapp.network.PokemonApi
 
-import com.example.pokeapp.model.Games.Generation
 import com.example.pokeapp.model.Pokemon.Pokemon
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map

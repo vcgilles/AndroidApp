@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material3.Icon
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -18,21 +17,17 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SearchBar
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -44,13 +39,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.room.util.query
 import coil.compose.AsyncImage
 import com.example.pokeapp.model.Pokemon.Pokemon
 import com.example.pokeapp.ui.components.NavigationType
@@ -76,10 +69,12 @@ fun PokemonCardBottom(pokemon: Pokemon, onPokemonClick: (String) -> Unit) {
                 .fillMaxWidth()
                 .wrapContentHeight()
         ) {
-            Row( modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-                horizontalArrangement = Arrangement.Center) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp),
+                horizontalArrangement = Arrangement.Center
+            ) {
                 Text(
                     text = "${pokemon.name}",
                     style = TextStyle(
@@ -100,12 +95,14 @@ fun PokemonCardBottom(pokemon: Pokemon, onPokemonClick: (String) -> Unit) {
                         .fillMaxHeight()
                 )
             }
-            Row(modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-                horizontalArrangement = Arrangement.Center) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp),
+                horizontalArrangement = Arrangement.Center
+            ) {
                 Button(
-                    onClick = { onPokemonClick(pokemon.name ) },
+                    onClick = { onPokemonClick(pokemon.name) },
                     modifier = Modifier
 
                 ) {
@@ -144,7 +141,8 @@ fun PokemonCardRail(pokemon: Pokemon, onPokemonClick: (String) -> Unit) {
         colors = CardDefaults.cardColors(MaterialTheme.colorScheme.primaryContainer)
     ) {
         Box(modifier = Modifier.fillMaxSize()) {
-            Column(modifier = Modifier.align(Alignment.Center),
+            Column(
+                modifier = Modifier.align(Alignment.Center),
             ) {
                 Row(horizontalArrangement = Arrangement.Center) {
                     Text(
@@ -192,36 +190,39 @@ fun PokemonCardRail(pokemon: Pokemon, onPokemonClick: (String) -> Unit) {
     }
 }
 
-
 /**
  * Composable function representing the screen displaying a list of Pokemon cards.
  *
  * @param pokemons The list of [Pokemon] objects to be displayed.
  * @param onPokemonClick The callback to be invoked when a Pokemon card is clicked.
  * @param navigationType The type of navigation (e.g., [NavigationType.BOTTOM_NAVIGATION] or [NavigationType.NAVIGATION_RAIL]).
+ * @param viewModel The [PokemonViewModel] used for managing Pokemon data.
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PokemonScreen(pokemons: List<Pokemon>, onPokemonClick: (String) -> Unit , navigationType: NavigationType , viewModel: PokemonViewModel = viewModel(factory = PokemonViewModel.Factory)) {
+fun PokemonScreen(
+    pokemons: List<Pokemon>,
+    onPokemonClick: (String) -> Unit,
+    navigationType: NavigationType,
+    viewModel: PokemonViewModel = viewModel(factory = PokemonViewModel.Factory)
+) {
 
     val pokemonByName by viewModel.pokemonByName.collectAsState()
     var name by remember { mutableStateOf("") }
     var active by remember { mutableStateOf(false) }
-
 
     Column {
         Row {
             SearchBar(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(10.dp)
-                ,
+                    .padding(10.dp),
                 query = name,
-                onQueryChange = { name = it},
+                onQueryChange = { name = it },
                 onSearch = { active = false },
                 active = active,
                 onActiveChange = { active = it },
-                placeholder = { "Search pokemon"},
+                placeholder = { "Search pokemon" },
                 leadingIcon = { Icon(Icons.Filled.Search, contentDescription = "Search") },
                 trailingIcon = {
                     if (active) {
@@ -231,7 +232,7 @@ fun PokemonScreen(pokemons: List<Pokemon>, onPokemonClick: (String) -> Unit , na
                         })
                     }
                 }
-            ){
+            ) {
                 viewModel.fetchPokemonByName(name)
             }
         }
@@ -239,40 +240,34 @@ fun PokemonScreen(pokemons: List<Pokemon>, onPokemonClick: (String) -> Unit , na
         // Display the characters info
         if (pokemonByName.isNotEmpty()) {
             if (navigationType == NavigationType.BOTTOM_NAVIGATION) {
-                LazyColumn{
+                LazyColumn {
                     items(pokemonByName) { p ->
-                        PokemonCardBottom(pokemon = p , onPokemonClick)
+                        PokemonCardBottom(pokemon = p, onPokemonClick = onPokemonClick)
                     }
                 }
             } else {
-                LazyRow{
+                LazyRow {
                     items(pokemonByName) { p ->
-                        PokemonCardRail(pokemon = p , onPokemonClick)
+                        PokemonCardRail(pokemon = p, onPokemonClick = onPokemonClick)
                     }
                 }
             }
         } else {
             if (navigationType == NavigationType.BOTTOM_NAVIGATION) {
-                LazyColumn{
+                LazyColumn {
                     items(pokemons) { p ->
-                        PokemonCardBottom(pokemon = p , onPokemonClick)
+                        PokemonCardBottom(pokemon = p, onPokemonClick = onPokemonClick)
                     }
                 }
             } else {
-                LazyRow{
+                LazyRow {
                     items(pokemons) { p ->
-                        PokemonCardRail(pokemon = p , onPokemonClick)
+                        PokemonCardRail(pokemon = p, onPokemonClick = onPokemonClick)
                     }
                 }
             }
         }
     }
-
-
-
-
 }
 
-fun SearchBar(modifier: Modifier, query: String, onQueryChange: (String) -> Unit, onSearch: (String) -> Unit, placeholder: () -> Unit, leadingIcon: () -> Unit) {
 
-}

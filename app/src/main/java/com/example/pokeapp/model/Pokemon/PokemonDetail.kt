@@ -1,6 +1,6 @@
 package com.example.pokeapp.model.Pokemon
 
-import kotlin.random.Random
+
 
 /**
  * Data class representing detailed information about a Pokemon.

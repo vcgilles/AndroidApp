@@ -14,7 +14,6 @@ import com.example.pokeapp.network.GamesApi.ApiGameState
 import com.example.pokeapp.network.GamesApi.GenerationListState
 import com.example.pokeapp.network.TypeApi.ApiTypeState
 import com.example.pokeapp.network.TypeApi.TypeListState
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map

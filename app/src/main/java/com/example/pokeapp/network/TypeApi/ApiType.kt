@@ -4,7 +4,7 @@ import com.example.pokeapp.model.Type.Type
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.serialization.Serializable
-import kotlin.random.Random
+
 
 /**
  * Serializable data class representing the response from the API for Pokemon types.
